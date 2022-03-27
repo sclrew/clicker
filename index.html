@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: orange;
+            text-align: center;
+            font-size: 22px;
+        }    
+        button{
+            width: 150px;
+            font-size: 25px;
+            background-color: black;
+            color: firebrick;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    
+    <div>
+       <span id="text"></span>
+        <br>
+        <button id="btn" onclick="onClick()">Click me</button>
+    </div>
+
+    <script>
+
+        let b = document.getElementById('btn')
+        let t = document.getElementById('text')
+        let vkl = false     // указатель включения счетчика 
+        let count = 0       // количество нажатий
+        let startTime = 10  // стартовое время
+        let interval
+        
+        function onClick(){
+            
+            if (vkl == false){
+                vkl = true
+                t.innerText = startTime
+                interval = setInterval(()=>{
+                    if (startTime == 0){
+                        clearInterval(interval) 
+                        b.disabled = true 
+                        setTimeout(()=>{
+                            b.disabled = false
+                            count = 0
+                            startTime = 10
+                            t.innerText = ''
+                            b.innerText = 'Click me'
+                            vkl = false
+                        },5000)
+                        return
+                    }
+                    startTime = startTime - 1
+                    t.innerText = startTime
+                } ,1000)
+                
+            } else {
+                count++
+                b.innerText = count
+
+            }
+
+
+        }
+
+    </script>
+
+</body>
+</html>
